@@ -235,3 +235,17 @@ document.querySelector("#slowrun").addEventListener("click", function(){
 	document.querySelector("#error").innerHTML = document.querySelector("#output").innerHTML = document.querySelector("#internalState").innerHTML = "";
 	brainfuck.executeCodeSlow();
 });
+
+document.querySelector("#code").addEventListener("keydown", function(){
+	localStorage.setItem("code", this.value);
+});
+document.querySelector("#input").addEventListener("keydown", function(){
+	localStorage.setItem("input", this.value);
+});
+
+window.addEventListener("load", function(){
+	if(localStorage.getItem("code"))
+		document.querySelector("#code").value = localStorage.getItem("code");
+	if(localStorage.getItem("input"))
+		document.querySelector("#input").value = localStorage.getItem("input");
+});
