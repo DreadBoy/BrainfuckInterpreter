@@ -93,7 +93,7 @@ var brainfuck = function (){
 			".": function(){
 				outputHandler(String.fromCharCode(register[index]));
 			},
-			";": function(){
+			",": function(){
 				register[index] = nextInput().charCodeAt(0);
 			}
 		};
