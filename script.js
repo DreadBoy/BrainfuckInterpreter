@@ -14,6 +14,7 @@ var brainfuck = function (){
 
 	var errorCallback = null;
 	var outputCallback = null;
+	var stateCallback = null;
 
 	var ret = new function Brainfuck(){};
 
@@ -111,6 +112,26 @@ var brainfuck = function (){
 		};
 	};
 
+	ret.executeCodeSlow = function executeCode(){
+		ret.reset();
+		var command = nextCommand();
+
+		var interval;
+
+		function loop() {
+			if(command){
+				executeCommand(command);
+				command = nextCommand();
+				stateHandler(ret.internalState());
+			}
+			else
+				clearInterval(interval)
+		}
+
+		loop();
+		interval = setInterval(loop, 100);
+	};
+
 	function nextInput() {
 		var ret = input[inputIndex];
 		inputIndex++;
@@ -161,6 +182,21 @@ var brainfuck = function (){
 		};
 	};
 
+	var stateHandler = function(msg){
+		if(stateCallback)
+			stateCallback(msg);
+		else
+			console(msg);
+	};
+
+	ret.stateHandler = function (callback){
+
+		stateCallback = function stateHandler(msg){		
+			if(callback)
+				callback(msg);
+		};
+	};
+
 	return ret;
 }();
 
@@ -180,4 +216,22 @@ document.querySelector("#run").addEventListener("click", function(){
 	brainfuck.executeCode();
 
 	document.querySelector("#internalState").innerHTML = brainfuck.internalState();
+});
+
+document.querySelector("#slowrun").addEventListener("click", function(){
+
+	brainfuck.errorHandler(function(msg){
+		document.querySelector("#error").innerHTML = msg;
+	});
+
+	brainfuck.outputHandler(function(char){
+		document.querySelector("#output").innerHTML += char;
+	});
+	
+	brainfuck.stateHandler(function(msg){
+		document.querySelector("#internalState").innerHTML = msg;
+	});
+
+	document.querySelector("#error").innerHTML = document.querySelector("#output").innerHTML = document.querySelector("#internalState").innerHTML = "";
+	brainfuck.executeCodeSlow();
 });
