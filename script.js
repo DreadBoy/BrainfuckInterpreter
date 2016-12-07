@@ -236,16 +236,16 @@ document.querySelector("#slowrun").addEventListener("click", function(){
 	brainfuck.executeCodeSlow();
 });
 
-document.querySelector("#code").addEventListener("keydown", function(){
+document.querySelector("#code").addEventListener("keyup", function(){
 	localStorage.setItem("code", this.value);
 });
-document.querySelector("#input").addEventListener("keydown", function(){
+document.querySelector("#input").addEventListener("keyup", function(){
 	localStorage.setItem("input", this.value);
 });
 
 window.addEventListener("load", function(){
-	if(localStorage.getItem("code"))
+	if(localStorage.getItem("code") !== null)
 		document.querySelector("#code").value = localStorage.getItem("code");
-	if(localStorage.getItem("input"))
+	if(localStorage.getItem("input") !== null)
 		document.querySelector("#input").value = localStorage.getItem("input");
 });
