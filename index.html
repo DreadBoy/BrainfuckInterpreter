@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Brainfuck interpreter</title>
+	<style type="text/css">
+		#error {
+			color: red;
+			font-weight: bold;
+		}
+		label {
+			font-weight: bold;
+		}
+		textarea {
+			width: 400px;
+			height: 200px;
+		}
+	</style>
+</head>
+<body>
+	<label for="code">Code:</label>
+	<br>
+	<textarea id="code">[This is example Hello World! program]
+++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.>.
+	</textarea>
+	<br>
+	<label for="input">Input:</label>
+	<br>
+	<textarea id="input"></textarea>
+	<br>
+	<button id="run">Run</button>
+	<br>
+	<label for="output">Output:</label>
+	<br>
+	<div id="output"></div>
+	<br>
+	<label for="output">Error:</label>
+	<br>
+	<div id="error"></div>
+	<br>
+	<label for="output">Internal state:</label>
+	<br>
+	<div id="internalState"></div>
+	<br>
+	<br>
+	<br>
+	<br>
+	<div>Created out of boredom in some dingy internet cafe in Chiang Mai by Matic Leva .</div>
+	<script type="text/javascript" src="script.js"></script>
+</body>
+</html>
